@@ -84,6 +84,7 @@ var __meta__ = { // jshint ignore:line
 
             that._wrapper();
             that._loader();
+            that._clearButton();
 
             that._dataSource();
             that._ignoreCase();
@@ -402,6 +403,7 @@ var __meta__ = { // jshint ignore:line
 
         _clearClick: function() {
             this.value(null);
+            this.trigger("change");
         },
 
         _resetFocusItem: function() {
@@ -681,6 +683,13 @@ var __meta__ = { // jshint ignore:line
             this._loading = $('<span class="k-icon k-loading" style="display:none"></span>').insertAfter(this.element);
         },
 
+        _clearButton: function() {
+            this._clear = $('<span unselectable="on" class="k-icon k-i-close">clear</span>').attr({
+                "role": "button",
+                "tabIndex": -1
+            }).insertAfter(this.element);
+        },
+
         _toggleHover: function(e) {
             $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
@@ -706,10 +715,6 @@ var __meta__ = { // jshint ignore:line
                 height: DOMelement.style.height
             });
 
-            that._clear = $('<span unselectable="on" class="k-icon k-i-close">clear</span>').attr({
-                "role": "button",
-                "tabIndex": -1
-            }).appendTo(wrapper);
             that._focused = that.element;
             that.wrapper = wrapper
                               .addClass("k-widget k-autocomplete k-header")
